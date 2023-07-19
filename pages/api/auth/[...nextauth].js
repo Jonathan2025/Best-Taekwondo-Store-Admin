@@ -1,8 +1,9 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import clientPromise from "../../../lib/mongodb"
 
-console.log("this is the google id", process.env.GOOGLE_ID)
-
+// 1 Here we are setting up the authentication configuration for the application
+// We are using Google as the auth provider and then the adapter Mongo DB, specifies the data storage mechanism for data and session information
 
 export default NextAuth({
   providers: [
@@ -11,5 +12,6 @@ export default NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET
     }),
-  ]
+  ], 
+  adapter: MongoDBAdapter(clientPromise),
 })
