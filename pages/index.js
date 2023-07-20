@@ -25,10 +25,11 @@ export default function Home() {
     return(
       // Otherwise if we are logged in then show the user
       // Minimum height to be screen
-      <div className='bg-blue-500 min-h-screen'> 
+      <div className='bg-blue-500 min-h-screen flex'> 
         {/* Add the navbar component */}
         <NavBar /> 
-        <div>Logged in as {session.user.email}</div>
+        {/* name section to take up the entire right side availiable space, margin right, top and bottom of 2, with rounded corners*/}
+        <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-5">Logged in as {session.user.email}</div>
       </div> 
     )
   
