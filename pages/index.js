@@ -1,3 +1,4 @@
+import NavBar from "@/components/nav"
 import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Home() {
@@ -23,7 +24,12 @@ export default function Home() {
 
     return(
       // Otherwise if we are logged in then show the user
-      <div>Logged in as {session.user.email}</div>
+      // Minimum height to be screen
+      <div className='bg-blue-500 min-h-screen'> 
+        {/* Add the navbar component */}
+        <NavBar /> 
+        <div>Logged in as {session.user.email}</div>
+      </div> 
     )
   
 }
