@@ -31,7 +31,7 @@ export default function Layout({children}) {
         {/* Add the navbar component */}
         <NavBar /> 
         {/* name section to take up the entire right side availiable space, margin right, top and bottom of 2, with rounded corners*/}
-        <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-5">This is the {children}</div>
+        <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-5">{children}</div>
       </div> 
     )
   
