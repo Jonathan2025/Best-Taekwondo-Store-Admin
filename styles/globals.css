@@ -23,18 +23,24 @@ h1{
   @apply bg-blue-500 text-white p-2 rounded-md;
 }
 
+/* Styling for the products table */
 
 table.productTable{
   @apply w-full;
 }
 
 
-
-
 table.productTable tr td{
-  @apply border border-gray-300 p-1;
+  @apply border border-blue-300 p-1;
 }
 
 table.productTable thead tr td{
-  @apply bg-blue-400;
+  @apply bg-blue-300;
 }
+
+
+/* Styling to the edit button styling to the x axis and y axis */
+table.productTable a {
+  @apply bg-blue-700 text-white rounded-md inline-flex py-1 gap-1 px-2
+}
+
