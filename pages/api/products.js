@@ -13,6 +13,11 @@ const handler = async(req, res) => {
 
     // When we have a get request, we want to get all the Products
     if (method === 'GET'){
+        // NOW if we have a specific product, then we should only return that product
+        // When we use findone, we will use the id as the editProductId
+        if(req.query.editProductId){
+            res.json(await Product.findOne({_id:req.query.editProductId}))
+        }
         res.json(await Product.find()) // We use mongoose's model.find to get all products
     }
 
