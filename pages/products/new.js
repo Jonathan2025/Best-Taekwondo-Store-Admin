@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 // When the admin clicks the new Product button, they will be led to the new product form page 
 
 export default function NewProduct(){
@@ -9,8 +10,8 @@ export default function NewProduct(){
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
-    
-
+    const [backToProducts, setBackToProducts] = useState(false) // we want to set a state where we can go back to the products page after submitting the form 
+    const router  = useRouter()
     // Function handler which is an async function that makes a post request to the api end point --> products.js
     // We used fetch in the past but here we will use axios to make the request
     const createProduct = async (event) => {
@@ -18,10 +19,14 @@ export default function NewProduct(){
         const data = {title, description, price}
         await axios.post('/api/products', data) // sample post request format - axios.post(url[, data[, config]])
         
+        setBackToProducts(true)
     
     }
 
-
+    if (backToProducts === true) {
+        // redirect the user back to the products page 
+        router.push('/products')
+    }
 
     return(
         <Layout>

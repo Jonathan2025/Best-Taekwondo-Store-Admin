@@ -8,7 +8,7 @@ const handler = async(req, res) => {
     // If send a post request from new.js, therefore the method will be post
     const {method} = req // we can access the specific method post, put etc like this 
 
-    await mongooseConnect()
+    await mongooseConnect() // call the mongoose connect function we created in mongoose.js
     
     if (method === "POST"){ 
         const {title, description, price} = req.body // we can get the title, desc, etc from the request.body
