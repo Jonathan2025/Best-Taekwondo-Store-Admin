@@ -11,4 +11,6 @@ const ProductSchema = new Schema({
 })
 
 // After creating a schema, we created a mongoose model based on that schema 
-const Product = model('product', ProductSchema)
+const Product = model('Product', ProductSchema)
+
+export default Product
