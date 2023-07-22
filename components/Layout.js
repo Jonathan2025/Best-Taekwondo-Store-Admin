@@ -1,5 +1,5 @@
 // We can resuse the code base that we have when a user is logged in 
-import NavBar from "@/components/nav"
+import NavBar from "./Nav"
 import { useSession, signIn, signOut } from "next-auth/react"
 
 // When we pass in children, whatever was inputted from index.js, products.js, etc where we called Layout, will be shown here

@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import { useState } from "react";
-
+import axios from "axios";
 // When the admin clicks the new Product button, they will be led to the new product form page 
 
 export default function NewProduct(){
@@ -9,14 +9,24 @@ export default function NewProduct(){
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
- 
+    
+
+    // Function handler which is an async function that makes a post request to the api end point --> products.js
+    // We used fetch in the past but here we will use axios to make the request
+    const createProduct = async (event) => {
+        event.preventDefault() // clicking on submit button will submit the form right away, this prevents that 
+        const data = {title, description, price}
+        await axios.post('/api/products', data) // sample post request format - axios.post(url[, data[, config]])
+        
+    
+    }
 
 
 
     return(
         <Layout>
             {/* On the form submit we need a function handler */}
-            <form onSubmit={}>
+            <form onSubmit={createProduct}>
 
             
                 <h1>New Product</h1>
