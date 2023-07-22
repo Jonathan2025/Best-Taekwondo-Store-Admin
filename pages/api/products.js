@@ -10,6 +10,14 @@ const handler = async(req, res) => {
 
     await mongooseConnect() // call the mongoose connect function we created in mongoose.js
     
+
+    // When we have a get request, we want to get all the Products
+    if (method === 'GET'){
+        res.json(await Product.find()) // We use mongoose's model.find to get all products
+    }
+
+
+
     if (method === "POST"){ 
         const {title, description, price} = req.body // we can get the title, desc, etc from the request.body
         // If we have a post method then we want to create a product using what is pass from req.body

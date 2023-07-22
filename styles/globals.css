@@ -22,3 +22,19 @@ h1{
 .btn-primary{
   @apply bg-blue-500 text-white p-2 rounded-md;
 }
+
+
+table.productTable{
+  @apply w-full;
+}
+
+
+
+
+table.productTable tr td{
+  @apply border border-gray-300 p-1;
+}
+
+table.productTable thead tr td{
+  @apply bg-blue-400;
+}
