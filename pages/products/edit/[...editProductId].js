@@ -11,10 +11,6 @@ const EditProductPage = () =>{
     const router = useRouter()
     //console.log({router}) // We can use the useRouter to access the page's pathname. Theres a query attribute
     const {editProductId} = router.query // From router.query we can access the product id 
-    console.log("product info", productInfo)
-
-
-
 
     useEffect(()=> {
 
@@ -37,7 +33,11 @@ const EditProductPage = () =>{
    
         <Layout>
             <h1>Edit Product</h1>
-            <ProductForm {...productInfo}/>
+            {/* A good thing to do is NOT load the edit form UNTIL we have the product info */}
+            {productInfo && (
+                <ProductForm {...productInfo}/>
+            )}
+            
         </Layout>
         
         
