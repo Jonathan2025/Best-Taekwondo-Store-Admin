@@ -21,21 +21,24 @@ const handler = async(req, res) => {
         res.json(await Product.find()) // We use mongoose's model.find to get all products if we are not requesting a specific id
     }
 
-
-
+    // create a product
     if (method === "POST"){ 
         const {title, description, price} = req.body // we can get the title, desc, etc from the request.body
         // If we have a post method then we want to create a product using what is pass from req.body
         const productDoc = await Product.create({
             title, description, price
         })
-
-
         // We will want to make a connection with mongoose database and send this productDoc
         res.json(productDoc)
-        
-    
-        }
+    }
+
+    // Edit a product 
+    if (method === 'PUT'){
+        const {title, description, price, _id} = req.body // we want to make sure to get the id 
+        await Product.updateOne({_id}, {title, description, price}) // using the mongoose updateone function we use _id as the filter and then the title, descr is the info we want to update
+
+        res.json(true) // the update has been made
+    }
        
 }
 
