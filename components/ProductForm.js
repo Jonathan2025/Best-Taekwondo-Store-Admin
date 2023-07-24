@@ -4,24 +4,34 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 
-
-export default function ProductForm(){
+// we pass in the CURRENT product information IF it exists, since we are using this form for both edit and new products
+export default function ProductForm({
+    // we dont want the same names as the state names so we use currentTitle, etc
+    title: currentTitle,
+    description: currentDescription,
+    price: currentPrice
+    })
+{
 
     // When the fields are changed on the form, we need to hold its value in useState
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
+    // normally we would have the useState initialized as '' but if it has existing information we will start there
+    const [title, setTitle] = useState(currentTitle) 
+    const [description, setDescription] = useState(currentDescription)
+    const [price, setPrice] = useState(currentPrice)
+
+
+
+
+
     const [backToProducts, setBackToProducts] = useState(false) // we want to set a state where we can go back to the products page after submitting the form 
     const router  = useRouter()
     // Function handler which is an async function that makes a post request to the api end point --> products.js
     // We used fetch in the past but here we will use axios to make the request
-    const createProduct = async (event) => {
+    const createProduct = async(event)=>{
         event.preventDefault() // clicking on submit button will submit the form right away, this prevents that 
         const data = {title, description, price}
         await axios.post('/api/products', data) // sample post request format - axios.post(url[, data[, config]])
-        
         setBackToProducts(true)
-    
     }
 
     if (backToProducts === true) {
@@ -29,13 +39,11 @@ export default function ProductForm(){
         router.push('/products')
     }
 
+
     return(
-        <Layout>
+       <>
             {/* On the form submit we need a function handler */}
             <form onSubmit={createProduct}>
-
-            
-                <h1>New Product</h1>
                 {/* The input will be styled from the global css file */}
                 <input 
                     type="text"
@@ -59,6 +67,6 @@ export default function ProductForm(){
                 type="submit"
                 className="btn-primary">Save</button>
             </form>
-        </Layout>
+        </>
     )
 }
