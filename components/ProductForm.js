@@ -51,6 +51,19 @@ export default function ProductForm({
         router.push('/products')
     }
 
+    // When we select a file to be uploaded, its information will be in the event
+    const uploadImages = async(event) => {
+        const files = event.target?.files //Inside the event we have the target attribute which has the name of file
+        if (files?.length > 0){
+            // We may have multiple images
+            const data = new FormData() // this is a constructor in js that creates a new instance of FormData object and allows you to construct and handle HTML form data to be sent to server
+            // such as through HTTP requests
+
+            files.forEach(file => data.append('file', file)) // append the data to each file 
+            const response = await axios.post('/api/upload', data) // Not updating our product we are just uploading photos 
+            console.log(response.data)
+        }
+    }
 
     return(
        <>
@@ -72,12 +85,12 @@ export default function ProductForm({
                 <div className="mt-2 mb-2">
                     {/* For the upload button center the items and place some space in between */}
                     {/* we use label instead of button because we have the input tag, with file upload */}
-                    <label className="w-32 h-32 text-center flex items-center justify-center gap-1 text-gray-500 rounded-lg bg-gray-200">
+                    <label className="w-32 h-32 cursor-pointer text-center flex items-center justify-center gap-1 text-gray-500 rounded-lg bg-gray-200">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                         </svg>
                         Upload
-                        <input type="file" className="hidden"/>
+                        <input type="file" onChange = {uploadImages} className="hidden"/>
                     </label>
                    
                     {!images?.length && (
