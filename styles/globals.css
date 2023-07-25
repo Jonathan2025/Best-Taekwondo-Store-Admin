@@ -39,8 +39,12 @@ table.productTable thead tr td{
 }
 
 
-/* Styling to the edit button styling to the x axis and y axis */
+/* Styling to the edit button on the x axis and y axis */
 table.productTable a {
-  @apply bg-blue-700 text-white rounded-md inline-flex py-1 gap-1 px-2
+  @apply bg-blue-600 text-white rounded-md inline-flex py-1 gap-1 px-2 mr-1;
 }
 
+ /* we can access the second button using a:nth-child(2), the delete button */
+table.productTable a:nth-child(2) {
+  @apply bg-red-600;
+}

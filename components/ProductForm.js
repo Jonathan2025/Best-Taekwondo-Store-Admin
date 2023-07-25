@@ -31,7 +31,6 @@ export default function ProductForm({
     // We used fetch in the past but here we will use axios to make the request
     const saveProduct = async(event)=>{
         event.preventDefault() // clicking on submit button will submit the form right away, this prevents that 
-
         const data = {title, description, price}
 
         if(_id){
@@ -40,9 +39,7 @@ export default function ProductForm({
         } else {
             
             await axios.post('/api/products', data) // sample post request format - axios.post(url[, data[, config]])
-            
         }
-        
         setBackToProducts(true) // once done then the user will be sent back to the product page
        
     }
