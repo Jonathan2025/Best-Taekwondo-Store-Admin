@@ -39,6 +39,15 @@ const handler = async(req, res) => {
 
         res.json(true) // the update has been made
     }
+
+
+    // Delete a product
+    if (method === 'DELETE'){
+        if (req.query?.id){
+            await Product.deleteOne({_id:req.query?.id})
+            res.json(true) // the update has been made
+        }
+    }
        
 }
 

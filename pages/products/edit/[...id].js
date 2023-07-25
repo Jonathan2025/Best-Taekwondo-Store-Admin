@@ -10,22 +10,22 @@ const EditProductPage = () =>{
     const [productInfo, setProductInfo] = useState(null)
     const router = useRouter()
     //console.log({router}) // We can use the useRouter to access the page's pathname. Theres a query attribute
-    const {editProductId} = router.query // From router.query we can access the product id 
+    const {id} = router.query // From router.query we can access the product id 
 
     useEffect(()=> {
 
         //If we dont have an id then we should just return 
-        if (!editProductId){
+        if (!id){
             return
         }
 
 
         // here we are making a request to ONLY that particular product
-        axios.get('/api/products?editProductId='+editProductId).then(response => {
+        axios.get('/api/products?id='+id).then(response => {
             // then we set the product info to be the response data of that particular product
             setProductInfo(response.data)
         })
-    }, [editProductId])
+    }, [id])
 
 
     

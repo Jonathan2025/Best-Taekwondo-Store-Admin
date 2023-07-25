@@ -44,7 +44,17 @@ table.productTable a {
   @apply bg-blue-600 text-white rounded-md inline-flex py-1 gap-1 px-2 mr-1;
 }
 
- /* we can access the second button using a:nth-child(2), the delete button */
+ /* we can access the delete button using a:nth-child(2), the delete button */
 table.productTable a:nth-child(2) {
   @apply bg-red-600;
+}
+
+
+/* Styling for the delete confirmation page */
+.btn-red{
+  @apply bg-red-600 text-white py-1 px-4 rounded-md;
+}
+
+.btn-default{
+  @apply bg-gray-400 text-white py-1 px-4 rounded-md;
 }
