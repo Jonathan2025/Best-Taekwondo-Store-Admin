@@ -58,11 +58,14 @@ export default function ProductForm({
             // We may have multiple images
             const data = new FormData() // this is a constructor in js that creates a new instance of FormData object and allows you to construct and handle HTML form data to be sent to server
             // such as through HTTP requests
-
-            files.forEach(file => data.append('file', file)) // append the data to each file 
+            // In other words instead of json data which we normally send we send form data. This is because as we learned from our previous projects 
+            // Json data doesnt work the best with other data types such as images
+            for (const file of file){
+                data.append('file', file) // append the data to each file 
+            }
             const response = await axios.post('/api/upload', data) // Not updating our product we are just uploading photos 
             console.log(response.data)
-        }
+        }   
     }
 
     return(
