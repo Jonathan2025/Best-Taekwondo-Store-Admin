@@ -60,11 +60,12 @@ export default function ProductForm({
             // such as through HTTP requests
             // In other words instead of json data which we normally send we send form data. This is because as we learned from our previous projects 
             // Json data doesnt work the best with other data types such as images
-            for (const file of file){
+            for (const file of files){
                 data.append('file', file) // append the data to each file 
             }
             const response = await axios.post('/api/upload', data) // Not updating our product we are just uploading photos 
-            console.log(response.data)
+
+            //console.log(response.data)
         }   
     }
 

@@ -4,7 +4,7 @@ import multiparty from 'multiparty' // Multiparty is a package that parses multi
 
 const handleUpload = async(req, res) => {
     // using the multipart format from the documentation
-    const form = multiparty.Form()
+    const form = new multiparty.Form()
 
     // The promise is a proxy for a value not necessarily known when promise is created
     // Allows you to associate handlers with an async action's eventual success value of failure reason
@@ -13,16 +13,16 @@ const handleUpload = async(req, res) => {
     // Instead of returning the new promise, we can just grab the fields and files 
     const {fields, files} = await new Promise((resolve, reject) => {
         form.parse(req, (err, fields, files)=>{
-
             if (err) reject(err) // if theres an error then reject with the error
             resolve({fields, files}) // otherwise we will resolve with the fields and files
         })
-        console.log(files.file.length) // important as we access an object we know what attributes are in it 
-        res.json('ok')
+       
     })
+    console.log(files.file.length) // important as we access an object we know what attributes are in it 
+    res.json('ok')
     
 }
-
+// set configurations to not parse the body to json
 export const config = {
     api: {bodyParser: false},
 
