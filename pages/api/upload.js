@@ -1,6 +1,8 @@
 // This will be the endpoint for uploading images 
 import multiparty from 'multiparty' // Multiparty is a package that parses multipart- form data requests which supports streaming
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3' // we will need the s3 client in order to upload images to our aws S3 bucket
+import fs from 'fs' //inbuilt application programming interface of the fs module which is used to read the file and return its content
+import mime from 'mime-types'
 
 const handleUpload = async(req, res) => {
     // using the multipart format from the documentation
@@ -22,14 +24,20 @@ const handleUpload = async(req, res) => {
     
     for (const file of files.file){
         const extension = file.originalFilename.split('.').pop() // Here we just want the extension of the file first
-
+        //Similar to what we had in our kickflix app, we cant have files with the same filename being uploaded, so here we can update the filename to include a date
+        
         console.log({extension, file})
-        // await client.send(new PutObjectCommand(
-        //     Bucket: 'best-tkd-online',
-        //     // Key will be the name of the file. We want to have unique file names 
-        //     Key: 
+
+        const newFilename = Date.now() + '.' + extension
+        await client.send(new PutObjectCommand(
+            Bucket: 'best-tkd-online',
+            // Key will be the name of the file. We want to have unique file names 
+            Key: newFilename,
+            Body: fs.readFileSync(file.path), 
+            ACL: 'public-read',
+            ContentType: mime.lookup(file.path), // Mime types will allow us to figure out the content type of the file being uploaded
     
-        // ))
+        ))
     }
 
 
