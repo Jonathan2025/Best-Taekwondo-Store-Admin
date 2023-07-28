@@ -1,6 +1,6 @@
 // This will be the endpoint for uploading images 
 import multiparty from 'multiparty' // Multiparty is a package that parses multipart- form data requests which supports streaming
-
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3' // we will need the s3 client in order to upload images to our aws S3 bucket
 
 const handleUpload = async(req, res) => {
     // using the multipart format from the documentation
@@ -19,6 +19,33 @@ const handleUpload = async(req, res) => {
        
     })
     console.log(files.file.length) // important as we access an object we know what attributes are in it 
+    
+    for (const file of files.file){
+        const extension = file.originalFilename.split('.').pop() // Here we just want the extension of the file first
+
+        console.log({extension, file})
+        // await client.send(new PutObjectCommand(
+        //     Bucket: 'best-tkd-online',
+        //     // Key will be the name of the file. We want to have unique file names 
+        //     Key: 
+    
+        // ))
+    }
+
+
+
+    // Set up the S3 client with the access key credentials from our s3 bucket
+    const client = new S3Client({
+        region: 'us-east-1',
+        credentials:{
+            accessKeyId: process.env.S3_ACCESS_KEY,
+            secretAccessKey: process.env.S3_SECRET_ACCESS_KEY
+        }
+    })
+
+    
+    
+    
     res.json('ok')
     
 }
