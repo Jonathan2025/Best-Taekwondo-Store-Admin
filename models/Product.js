@@ -7,7 +7,8 @@ import { model, Schema, models } from "mongoose"
 const ProductSchema = new Schema({
     title: {type:String, required:true}, 
     description: String, 
-    price: {type:Number, required:true}
+    price: {type:Number, required:true},
+    images: [{type:String}]
 })
 
 // After creating a schema, we created a mongoose model based on that schema 

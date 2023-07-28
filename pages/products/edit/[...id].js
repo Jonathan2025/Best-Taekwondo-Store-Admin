@@ -12,6 +12,8 @@ const EditProductPage = () =>{
     //console.log({router}) // We can use the useRouter to access the page's pathname. Theres a query attribute
     const {id} = router.query // From router.query we can access the product id 
 
+
+    console.log(productInfo)
     useEffect(()=> {
 
         //If we dont have an id then we should just return 

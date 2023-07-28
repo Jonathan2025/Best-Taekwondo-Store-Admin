@@ -58,3 +58,8 @@ table.productTable a:nth-child(2) {
 .btn-default{
   @apply bg-gray-400 text-white py-1 px-4 rounded-md;
 }
+
+/* for all images */
+img{
+  max-height: 100%;
+}

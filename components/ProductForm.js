@@ -11,7 +11,7 @@ export default function ProductForm({
     title: currentTitle,
     description: currentDescription,
     price: currentPrice,
-    images: currentImages
+    images: currentImages,
     })
 {
 
@@ -21,7 +21,7 @@ export default function ProductForm({
     const [title, setTitle] = useState(currentTitle) 
     const [description, setDescription] = useState(currentDescription)
     const [price, setPrice] = useState(currentPrice)
-    const [images, setImages] = useState(currentImages)
+    const [images, setImages] = useState(currentImages || [])
 
 
 
@@ -33,7 +33,7 @@ export default function ProductForm({
     // We used fetch in the past but here we will use axios to make the request
     const saveProduct = async(event)=>{
         event.preventDefault() // clicking on submit button will submit the form right away, this prevents that 
-        const data = {title, description, price}
+        const data = {title, description, price, images}
 
         if(_id){
             // if we have an id then we should be updating the product 
@@ -65,7 +65,10 @@ export default function ProductForm({
             }
             const response = await axios.post('/api/upload', data) // Not updating our product we are just uploading photos 
 
-            //console.log(response.data)
+            console.log(response.data)
+            setImages(oldImages => {
+                return [...oldImages, ...response.data.links] // so pretty much here for the setImages state we will have both the old links AND newly added ones
+            })
         }   
     }
 
@@ -86,7 +89,17 @@ export default function ProductForm({
                     value={description}
                     onChange = {event => setDescription(event.target.value)}
                 />
-                <div className="mt-2 mb-2">
+                <div className="mt-2 mb-2 flex flex-wrap gap-2">
+                    
+
+                    {/* Similar to our kickflix app if there is an image uploaded we are pretty much using the link to then show the actual image */}
+                    {!!images?.length && images.map(link => {
+                        <div key={link} className="h-24">
+                            <img src={link} alt="" className="rounded-lg"/>
+                        </div>
+                    })}
+
+
                     {/* For the upload button center the items and place some space in between */}
                     {/* we use label instead of button because we have the input tag, with file upload */}
                     <label className="w-32 h-32 cursor-pointer text-center flex items-center justify-center gap-1 text-gray-500 rounded-lg bg-gray-200">
