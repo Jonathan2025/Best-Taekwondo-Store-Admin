@@ -7,7 +7,7 @@ import mime from 'mime-types'
 const handleUpload = async(req, res) => {
     // using the multipart format from the documentation
     const form = new multiparty.Form()
-
+    const bucketName = 'best-tkd-online'
     // The promise is a proxy for a value not necessarily known when promise is created
     // Allows you to associate handlers with an async action's eventual success value of failure reason
     // promise is in one of these states: pending, fulfilled, rejected
@@ -22,28 +22,8 @@ const handleUpload = async(req, res) => {
     })
     console.log(files.file.length) // important as we access an object we know what attributes are in it 
     
-    for (const file of files.file){
-        const extension = file.originalFilename.split('.').pop() // Here we just want the extension of the file first
-        //Similar to what we had in our kickflix app, we cant have files with the same filename being uploaded, so here we can update the filename to include a date
-        
-        console.log({extension, file})
-
-        const newFilename = Date.now() + '.' + extension
-        await client.send(new PutObjectCommand(
-            Bucket: 'best-tkd-online',
-            // Key will be the name of the file. We want to have unique file names 
-            Key: newFilename,
-            Body: fs.readFileSync(file.path), 
-            ACL: 'public-read',
-            ContentType: mime.lookup(file.path), // Mime types will allow us to figure out the content type of the file being uploaded
-    
-        ))
-    }
-
-
-
-    // Set up the S3 client with the access key credentials from our s3 bucket
-    const client = new S3Client({
+      // Set up the S3 client with the access key credentials from our s3 bucket
+      const client = new S3Client({
         region: 'us-east-1',
         credentials:{
             accessKeyId: process.env.S3_ACCESS_KEY,
@@ -51,10 +31,26 @@ const handleUpload = async(req, res) => {
         }
     })
 
-    
-    
-    
-    res.json('ok')
+    const links = []
+    for (const file of files.file){
+        const extension = file.originalFilename.split('.').pop() // Here we just want the extension of the file first
+        //Similar to what we had in our kickflix app, we cant have files with the same filename being uploaded, so here we can update the filename to include a date
+        
+        console.log({extension, file})
+
+        const newFilename = Date.now() + '.' + extension
+        await client.send(new PutObjectCommand({
+            Bucket: bucketName,
+            // Key will be the name of the file. We want to have unique file names 
+            Key: newFilename,
+            Body: fs.readFileSync(file.path), 
+            ACL: 'public-read',
+            ContentType: mime.lookup(file.path), // Mime types will allow us to figure out the content type of the file being uploaded
+        }))
+        const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`
+        links.push(link) // add the specific link to our link array
+    }
+    return res.json({links})
     
 }
 // set configurations to not parse the body to json
