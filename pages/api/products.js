@@ -1,8 +1,7 @@
 // This will pretty much be 
-
-import mongoose from "mongoose"
 import Product from "@/models/Product"
 import mongooseConnect from "@/lib/mongoose"
+
 
 const handler = async(req, res) => {
     // If send a post request from new.js, therefore the method will be post
@@ -15,8 +14,8 @@ const handler = async(req, res) => {
     if (method === 'GET'){
         // NOW if we have a specific product id, then we should only return that product
         // When we use findone, we will use the id as the editProductId
-        if(req.query?.editProductId){
-            res.json(await Product.findOne({_id:req.query.editProductId}))
+        if(req.query?.id){
+            res.json(await Product.findOne({_id:req.query.id}))
         }
         res.json(await Product.find()) // We use mongoose's model.find to get all products if we are not requesting a specific id
     }

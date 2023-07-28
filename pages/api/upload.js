@@ -21,7 +21,6 @@ const handleUpload = async(req, res) => {
        
     })
     console.log(files.file.length) // important as we access an object we know what attributes are in it 
-    
       // Set up the S3 client with the access key credentials from our s3 bucket
       const client = new S3Client({
         region: 'us-east-1',

@@ -4,46 +4,38 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 
-// we pass in the CURRENT product information IF it exists, since we are using this form for both edit and new products
-export default function ProductForm({
-    _id, // we pass in the id 
+// we pass in the CURRENT product information PROPS IF it exists, since we are using this form for both edit and new products
+const ProductForm = 
+    ({_id, // we pass in the id 
     // we dont want the same names as the state names so we use currentTitle, etc
     title: currentTitle,
     description: currentDescription,
     price: currentPrice,
     images: currentImages,
-    })
+    }) => 
 {
 
     // When the fields are changed on the form, we need to hold its value in useState
     // normally we would have the useState initialized as '' but if it has existing information we will start there
 
-    const [title, setTitle] = useState(currentTitle) 
-    const [description, setDescription] = useState(currentDescription)
-    const [price, setPrice] = useState(currentPrice)
+    const [title, setTitle] = useState(currentTitle || '') 
+    const [description, setDescription] = useState(currentDescription || '')
+    const [price, setPrice] = useState(currentPrice || '')
     const [images, setImages] = useState(currentImages || [])
-
-
-
-
-
     const [backToProducts, setBackToProducts] = useState(false) // we want to set a state where we can go back to the products page after submitting the form 
     const router  = useRouter()
     // Function handler which is an async function that makes a post request to the api end point --> products.js
     // We used fetch in the past but here we will use axios to make the request
-    const saveProduct = async(event)=>{
+    const saveProduct = async(event) => {
         event.preventDefault() // clicking on submit button will submit the form right away, this prevents that 
         const data = {title, description, price, images}
-
         if(_id){
             // if we have an id then we should be updating the product 
             await axios.put('/api/products', {...data, _id})// here we use a spread operator to pass in the data OF the specific product
         } else {
-            
             await axios.post('/api/products', data) // sample post request format - axios.post(url[, data[, config]])
         }
         setBackToProducts(true) // once done then the user will be sent back to the product page
-       
     }
 
     if (backToProducts === true) {
@@ -64,8 +56,6 @@ export default function ProductForm({
                 data.append('file', file) // append the data to each file 
             }
             const response = await axios.post('/api/upload', data) // Not updating our product we are just uploading photos 
-
-            console.log(response.data)
             setImages(oldImages => {
                 return [...oldImages, ...response.data.links] // so pretty much here for the setImages state we will have both the old links AND newly added ones
             })
@@ -131,3 +121,7 @@ export default function ProductForm({
         </>
     )
 }
+
+
+
+export default ProductForm

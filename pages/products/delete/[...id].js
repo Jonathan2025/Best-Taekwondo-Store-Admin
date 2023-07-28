@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 const DeleteProductPage = () => {
 
     const router = useRouter() // We can use the useRouter to access the page's pathname. Theres a query attribute
-    const [productInfo, setProductInfo] = useState()
+    const [productInfo, setProductInfo] = useState(null)
     const {id} = router.query  // From router.query we can access the product id
    
     
@@ -16,13 +16,14 @@ const DeleteProductPage = () => {
         if(!id){
             return
         }
-
         // If there is a product id
         axios.get('/api/products?id='+id).then(response => {
             // then we set the product info to be the response data of that particular product
             setProductInfo(response.data)
         })
     }, [id])
+
+    console.log('this is', productInfo)
 
     // IF the user clicks NO, then they will be returned to the products page 
     const previousPage = () => {
@@ -41,7 +42,7 @@ const DeleteProductPage = () => {
         // the ? is used in case we dont have anything in product info
         <Layout>
                 {/* Accessing the title requires us to get the 0 index of the object */}
-                <h1 className="text-center">Are you sure you want to delete "{productInfo[0]?.title}"</h1>
+                <h1 className="text-center">Are you sure you want to delete {productInfo[0].title}</h1>
                 {/* add space between the two buttons and center it */ }
                 <div className = "flex gap-2 justify-center"> 
                     <button onClick={deleteProduct} className="btn-red">Yes</button>
