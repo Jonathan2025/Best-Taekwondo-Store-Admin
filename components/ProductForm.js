@@ -23,6 +23,8 @@ const ProductForm =
     const [price, setPrice] = useState(currentPrice || '')
     const [images, setImages] = useState(currentImages || [])
     const [backToProducts, setBackToProducts] = useState(false) // we want to set a state where we can go back to the products page after submitting the form 
+    const [isUploading, setIsUploading] = useState(false)
+    
     const router  = useRouter()
     // Function handler which is an async function that makes a post request to the api end point --> products.js
     // We used fetch in the past but here we will use axios to make the request
@@ -47,6 +49,8 @@ const ProductForm =
     const uploadImages = async(event) => {
         const files = event.target?.files //Inside the event we have the target attribute which has the name of file
         if (files?.length > 0){
+
+            setIsUploading(true)
             // We may have multiple images
             const data = new FormData() // this is a constructor in js that creates a new instance of FormData object and allows you to construct and handle HTML form data to be sent to server
             // such as through HTTP requests
@@ -60,6 +64,7 @@ const ProductForm =
                 console.log("this is the", response.data.links)
                 return [...oldImages, ...response.data.links] // so pretty much here for the setImages state we will have both the old links AND newly added ones
             })
+            setIsUploading(false)
         }   
     }
 
@@ -84,15 +89,10 @@ const ProductForm =
                     value={description}
                     onChange = {event => setDescription(event.target.value)}
                 />
-                <div className="mb-2 flex flex-wrap gap-2">
+                <div className="mb-2 mt-2 flex flex-wrap gap-2">
                     
 
-                    {/* Similar to our kickflix app if there is an image uploaded we are pretty much using the link to then show the actual image */}
-                    {!!images?.length && images.map((link) => (
-                        <div key={link} className="h-24">
-                            <img src={link} alt="" className="rounded-lg"/>
-                        </div>
-                    ))}
+               
 
 
                     {/* For the upload button center the items and place some space in between */}
@@ -104,10 +104,14 @@ const ProductForm =
                         Upload
                         <input type="file" onChange = {uploadImages} className="hidden"/>
                     </label>
-                   
-                    {!images?.length && (
-                        <div>No Photos in this product</div>
-                    )}
+
+
+                         {/* Similar to our kickflix app if there is an image uploaded we are pretty much using the link to then show the actual image */}
+                        {!!images?.length && images.map((link) => (
+                        <div key={link} className="h-32">
+                            <img src={link} alt="" className="rounded-lg"/>
+                        </div>
+                    ))}
                 </div>
 
 
