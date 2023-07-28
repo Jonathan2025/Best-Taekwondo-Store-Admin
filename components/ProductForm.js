@@ -57,10 +57,15 @@ const ProductForm =
             }
             const response = await axios.post('/api/upload', data) // Not updating our product we are just uploading photos 
             setImages(oldImages => {
+                console.log("this is the", response.data.links)
                 return [...oldImages, ...response.data.links] // so pretty much here for the setImages state we will have both the old links AND newly added ones
             })
         }   
     }
+
+    console.log("here are",images)
+
+
 
     return(
        <>
@@ -79,15 +84,15 @@ const ProductForm =
                     value={description}
                     onChange = {event => setDescription(event.target.value)}
                 />
-                <div className="mt-2 mb-2 flex flex-wrap gap-2">
+                <div className="mb-2 flex flex-wrap gap-2">
                     
 
                     {/* Similar to our kickflix app if there is an image uploaded we are pretty much using the link to then show the actual image */}
-                    {!!images?.length && images.map(link => {
+                    {!!images?.length && images.map((link) => (
                         <div key={link} className="h-24">
                             <img src={link} alt="" className="rounded-lg"/>
                         </div>
-                    })}
+                    ))}
 
 
                     {/* For the upload button center the items and place some space in between */}
