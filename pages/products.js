@@ -26,9 +26,11 @@ export default function Products() {
                         <td></td>
                     </tr>
                 </thead>
+
                 {/* Here we will use a map function to map EACH product and show it  */}
+                <tbody>
                 {products.map(product=> (
-                    <tr> 
+                    <tr key={product._id}> 
                         <td>{product.title}</td>
                         <td>
                             {/* The edit button */}
@@ -52,9 +54,9 @@ export default function Products() {
                         </td>
                     </tr>
                 ))}
-                <body>
+                
 
-                </body>
+                </tbody>
             </table>
         </Layout>
     )

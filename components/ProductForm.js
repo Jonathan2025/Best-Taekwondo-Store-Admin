@@ -69,8 +69,9 @@ const ProductForm =
         }   
     }
 
-    const updateImagesOrder = () => {
-        console.log("hey")
+    // After the drag and drop, new order will be set and saved
+    const updateImagesOrder = (images) => {
+       setImages(images)
     }
 
 
@@ -107,7 +108,8 @@ const ProductForm =
                         Upload
                         <input type="file" onChange = {uploadImages} className="hidden"/>
                     </label>
-
+                    
+                    {/* React sortable will allow us to drag and drop the images in an order we choose */}
                     <ReactSortable 
                         list={images} 
                         className = "flex flex-wrap gap-1"
