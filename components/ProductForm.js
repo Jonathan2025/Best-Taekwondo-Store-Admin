@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-
+import UploadSpinner from "./UploadSpinner";
 
 // we pass in the CURRENT product information PROPS IF it exists, since we are using this form for both edit and new products
 const ProductForm = 
@@ -112,14 +112,15 @@ const ProductForm =
                             <img src={link} alt="" className="rounded-lg"/>
                         </div>
                     ))}
+
+                {isUploading && (
+                    <div className="h-24">
+                        <UploadSpinner />
+                    </div>
+                )}
                 </div>
 
 
-               {isUploading && (
-                <div className="h-24">
-                    Uploading
-                </div>
-               )}
                
                 <input 
                     type="number" 
