@@ -114,7 +114,7 @@ const ProductForm =
                     ))}
 
                 {isUploading && (
-                    <div className="h-24">
+                    <div className="h-24 flex items-center">
                         <UploadSpinner />
                     </div>
                 )}
