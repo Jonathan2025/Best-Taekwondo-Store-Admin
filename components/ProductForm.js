@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import UploadSpinner from "./UploadSpinner";
+import {ReactSortable} from "react-sortablejs"
 
 // we pass in the CURRENT product information PROPS IF it exists, since we are using this form for both edit and new products
 const ProductForm = 
@@ -68,7 +69,9 @@ const ProductForm =
         }   
     }
 
-    console.log("here are",images)
+    const updateImagesOrder = () => {
+        console.log("hey")
+    }
 
 
 
@@ -92,7 +95,7 @@ const ProductForm =
                 <div className="mb-2 mt-2 flex flex-wrap gap-2">
                     
 
-               
+                    
 
 
                     {/* For the upload button center the items and place some space in between */}
@@ -105,6 +108,10 @@ const ProductForm =
                         <input type="file" onChange = {uploadImages} className="hidden"/>
                     </label>
 
+                    <ReactSortable 
+                        list={images} 
+                        className = "flex flex-wrap gap-1"
+                        setList={updateImagesOrder}>
 
                          {/* Similar to our kickflix app if there is an image uploaded we are pretty much using the link to then show the actual image */}
                         {!!images?.length && images.map((link) => (
@@ -112,7 +119,7 @@ const ProductForm =
                             <img src={link} alt="" className="rounded-lg"/>
                         </div>
                     ))}
-
+                    </ReactSortable>
                 {isUploading && (
                     <div className="h-24 flex items-center">
                         <UploadSpinner />
