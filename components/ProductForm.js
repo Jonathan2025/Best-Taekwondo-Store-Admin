@@ -50,7 +50,7 @@ const ProductForm =
         const files = event.target?.files //Inside the event we have the target attribute which has the name of file
         if (files?.length > 0){
 
-            setIsUploading(true)
+            setIsUploading(true) // we will create a spinner that tells us if image is uploading
             // We may have multiple images
             const data = new FormData() // this is a constructor in js that creates a new instance of FormData object and allows you to construct and handle HTML form data to be sent to server
             // such as through HTTP requests
@@ -115,7 +115,11 @@ const ProductForm =
                 </div>
 
 
-               
+               {isUploading && (
+                <div className="h-24">
+                    Uploading
+                </div>
+               )}
                
                 <input 
                     type="number" 
