@@ -1,13 +1,15 @@
 import Layout from "@/components/Layout"
-
+import axios from "axios"
 const categories = () => {
 
 
-  const [name, saveName] = useState('')
+  const [name, setName] = useState('')
 
   // Create a save category handler function that will run on submit 
-  const saveCategory = () => {
-
+  const saveCategory = async() => {
+    await axios.post('/api/categories', {name})
+    // Once the category is submitted we clear the input 
+    setName('')
   }
   return (
     <Layout>
