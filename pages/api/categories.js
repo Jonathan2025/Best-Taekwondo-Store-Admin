@@ -1,11 +1,18 @@
-// Just like api/products.js, this will be api/categories which will be the endpoint for categories
+// Just like api/products.js, this will be api/categories which will be the endpoint for categories 
+// And will be the handler depending on the req.body method
+import Category from "@/models/Category"
 
-const categories = (req, res) => {
+
+const categoryHandler = async(req, res) => {
     const {method} = req // basically accessing req.method
-
-    if (method === 'POST'){
+   
+    if (method === "POST"){
         const {name} = req.body
+         // If we have a post method then we want to create a category using what is pass from req.body
+        const categoryDoc = await Category.create({name})
+        // We will want to make a connection with mongoose database and send this categoryDoc
+        res.json(categoryDoc)
     }
 }
 
-export default categories
+export default categoryHandler

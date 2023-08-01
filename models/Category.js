@@ -8,6 +8,6 @@ const CategorySchema = new Schema({
 })
 
 // After creating a schema, we created a mongoose model based on that schema 
-const Category = models.Category || model('Category', CategorySchema) // here if the category model doesnt exist then create a new mongoose model
+const Category = models?.Category || model('Category', CategorySchema) // here if the category model doesnt exist then create a new mongoose model
 
 export default Category

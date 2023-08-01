@@ -1,3 +1,5 @@
+// This is the spinner for when something is being uploaded
+
 import { HashLoader } from "react-spinners"
 
 const UploadSpinner = () => {
