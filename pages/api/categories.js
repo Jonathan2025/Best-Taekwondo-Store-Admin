@@ -16,9 +16,9 @@ const categoryHandler = async(req, res) => {
    
     if (method === "POST"){
         console.log("this is req body", req.body)
-        const {name} = req.body
+        const {name, parentCategory} = req.body
          // If we have a post method then we want to create a category using what is pass from req.body
-        const categoryDoc = await Category.create({name})
+        const categoryDoc = await Category.create({name, parentCategory})
         // We will want to make a connection with mongoose database and send this categoryDoc
         res.json(categoryDoc)
     }

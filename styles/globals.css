@@ -4,13 +4,13 @@
 
 
 /* here we are applying a style to all input fields, border-2 sets the thickness */
-input, textarea{
+input, textarea, select {
   @apply border-2 border-gray-500 rounded-md p-1 w-full;
   @apply mb-2; /* Apply more spacing on the bottom */
 }
 
 /* When user clicks on the input then it will change color outline */
-input:focus{
+input:focus, select:focus{
   @apply border-blue-900;
 }
 
