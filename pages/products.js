@@ -18,7 +18,7 @@ export default function Products() {
         <Layout>
             {/* A link that looks like a button here that will allow the admin to add a new product */}
             <Link className="bg-orange-400 text-white rounded-md p-2" href={'/products/new'}>Add New Product</Link>
-            <table className="productTable mt-5">
+            <table className="basic mt-5">
                 {/* head of the table */}
                 <thead>
                     <tr>

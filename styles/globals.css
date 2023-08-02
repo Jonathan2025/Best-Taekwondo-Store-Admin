@@ -25,27 +25,27 @@ h1{
 
 /* Styling for the products table */
 
-table.productTable{
+table.basic{
   @apply w-full;
 }
 
 
-table.productTable tr td{
+table.basic tr td{
   @apply border border-blue-300 p-1;
 }
 
-table.productTable thead tr td{
+table.basic thead tr td{
   @apply bg-blue-300;
 }
 
 
 /* Styling to the edit button on the x axis and y axis */
-table.productTable a {
+table.basic a {
   @apply bg-blue-600 text-white rounded-md inline-flex py-1 gap-1 px-2 mr-1;
 }
 
  /* we can access the delete button using a:nth-child(2), the delete button */
-table.productTable a:nth-child(2) {
+table.basic a:nth-child(2) {
   @apply bg-red-600;
 }
 

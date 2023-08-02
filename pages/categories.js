@@ -1,10 +1,21 @@
 import Layout from "@/components/Layout"
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 const Categories = () => {
 
 
   const [name, setName] = useState('')
+  const [categories, setCategories] = ([])
+
+  // create a useeffect that will run and make an axios request to the categories endpoint
+  useEffect(()=> {
+    axios.get('/api/categories').then(result =>{
+      result.data
+    })
+  }, [])
+
+
+
 
   // Create a save category handler function that will run on submit 
   const saveCategory = async(event) => {
@@ -29,6 +40,26 @@ const Categories = () => {
             />  
           <button type="submit" className="btn-primary py-1">Save</button>
         </form>
+
+        <table className="basic mt-2">
+          <thead>
+            <tr>
+              <td>
+                Category Name
+              </td>
+            </tr>
+          </thead>
+          {/* Here we will show all the categories through map function*/}
+          <tbody>
+            {categories.length > 0 && categories.map(
+              category =>(
+                <tr> 
+                  <td>{category.name}</td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
         
     </Layout>
   )
