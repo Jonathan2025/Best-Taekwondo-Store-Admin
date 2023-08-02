@@ -67,9 +67,8 @@ const Categories = () => {
         <table className="basic mt-2">
           <thead>
             <tr>
-              <td>
-                Category Name
-              </td>
+              <td>Category Name</td>
+              <td>Parent Category</td>
             </tr>
           </thead>
           {/* Here we will show all the categories through map function*/}
@@ -78,6 +77,9 @@ const Categories = () => {
             {categories.length > 0 && categories.map(category =>(
                 <tr> 
                   <td>{category.name}</td>
+                  {/* some categories might not have a parent thats why we have the ?*/}
+                  <td>{category?.parentCategory?.name}</td>
+
                 </tr>
               )
             )}

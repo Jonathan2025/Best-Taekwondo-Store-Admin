@@ -11,7 +11,7 @@ const categoryHandler = async(req, res) => {
 
     // Now if we have a get method then we just return the categories and show them 
     if (method === 'GET'){
-        res.json(await Category.find())
+        res.json(await Category.find().populate('parentCategory')) //by using populate, an array of documents will be returned IN PLACE of the original _ids
     }
    
     if (method === "POST"){
