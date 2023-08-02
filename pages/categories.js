@@ -5,17 +5,14 @@ const Categories = () => {
 
 
   const [name, setName] = useState('')
-  const [categories, setCategories] = ([])
+  const [categories, setCategories] = useState([])
 
   // create a useeffect that will run and make an axios request to the categories endpoint
   useEffect(()=> {
     axios.get('/api/categories').then(result =>{
-      result.data
+      setCategories(result.data)
     })
   }, [])
-
-
-
 
   // Create a save category handler function that will run on submit 
   const saveCategory = async(event) => {
@@ -51,8 +48,8 @@ const Categories = () => {
           </thead>
           {/* Here we will show all the categories through map function*/}
           <tbody>
-            {categories.length > 0 && categories.map(
-              category =>(
+
+            {categories.length > 0 && categories.map(category =>(
                 <tr> 
                   <td>{category.name}</td>
                 </tr>
