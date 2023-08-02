@@ -19,17 +19,25 @@ const Categories = () => {
   // Create a save category handler function that will run on submit 
   const saveCategory = async(event) => {
     event.preventDefault()
-    await axios.post('/api/categories', {name, parentCategory}) //make an axios request, passing in all the necessary data
+    const data = {name, parentCategory}
+    
+    // If we are editing we dont want to CREATE a new category, instead we just want to edit the existing one
+    if (editedCategory){
+      data._id = editedCategory._id // here we can add to data the id of the category we clicked to edit
+      await axios.put('/api/categories', data) 
+      setEditedCategory(null) // once we edited a category we want to reset the editedcategory so then the user can edit something else 
+    } else{
+      await axios.post('/api/categories', data) //make an axios request, passing in all the necessary data
+    }
+    
     // Once the category is submitted we call getCategories so that the categories are updated
     getCategories()
   }
 
   // edit category handler that will run when we click on the edit button below
   const editCategory = (category) => {
-    console.log(category)
     setEditedCategory(category)
-    // Prepopulate with the name and category IF it has one (meaning if we are editing)
-    setName(category.name)
+    setName(category.name) // Prepopulate with the name and category IF it already has one (meaning if we are editing)
     setParentCategory(category.parentCategory?._id)
   }
 
