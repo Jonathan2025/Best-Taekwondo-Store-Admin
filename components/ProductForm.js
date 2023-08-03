@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import UploadSpinner from "./UploadSpinner";
@@ -25,13 +25,31 @@ const ProductForm =
     const [images, setImages] = useState(currentImages || [])
     const [backToProducts, setBackToProducts] = useState(false) // we want to set a state where we can go back to the products page after submitting the form 
     const [isUploading, setIsUploading] = useState(false)
-    
+    const [categories, setCategories] = useState([false]) // this is the data that we get back from request from the categories endpoint
+    const [category, setCategory] = useState('') // this is setting the category ON the product 
+
+
+
+
+
     const router  = useRouter()
+
+    // This is a cool thing to do, getting information from a seperate endpoint
+    // we are in the product form and here we make a request to get the category data from the endpoint
+    useEffect(() =>{
+        axios.get('/api/categories').then(result => {
+            setCategories(result.data) // now we can access all thje categories that were created
+        })
+    }, [])
+
+
+
+
     // Function handler which is an async function that makes a post request to the api end point --> products.js
     // We used fetch in the past but here we will use axios to make the request
     const saveProduct = async(event) => {
         event.preventDefault() // clicking on submit button will submit the form right away, this prevents that 
-        const data = {title, description, price, images}
+        const data = {title, description, price, images, category}
         if(_id){
             // if we have an id then we should be updating the product 
             await axios.put('/api/products', {...data, _id})// here we use a spread operator to pass in the data OF the specific product
@@ -87,7 +105,25 @@ const ProductForm =
                     value={title}
                     // onchange we will change the title state with what was added from the event.target
                     onChange = {event => setTitle(event.target.value)}
+
                 />
+
+
+                {/* here we will allow the user to choose the category */}
+                <select value={category}
+                    onChange={event => setCategory(event.target.value)}
+                    >
+                    <option value = "">Uncategorized</option>
+
+                    {/* from our use state we are able to get all the categories and then map them */}
+                    {categories.length > 0 && categories.map(category => (
+                        <option value={category._id}>{category.name}</option>
+                    ))}
+
+                </select>
+
+
+
                 <textarea 
                     placeholder="Description"
                     value={description}
