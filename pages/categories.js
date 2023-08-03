@@ -10,7 +10,7 @@ const Categories = ({swal}) => {
 
   const [name, setName] = useState('')
   const [categories, setCategories] = useState([])
-  const [parentCategory, setParentCategory] = useState('')
+  const [parentCategory, setParentCategory] = useState(null)
   const [editedCategory, setEditedCategory] = useState(null)
 
   const getCategories = () => {
