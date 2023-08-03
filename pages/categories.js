@@ -54,11 +54,16 @@ const Categories = ({swal}) => {
       text: `Delete ${category.name}?`,
       showCancelButton:true, 
       cancelButtonTitle: 'Cancel',
-      confirmButtonText: 'YES!'
-    }).then(result => {
-      // when confirmed and promise resolved...
-    }).catch(error => {
-      // when promise rejected...
+      confirmButtonText: 'DELETE!',
+      confirmButtonColor: '#FF0000'
+    }).then(async result => {
+      //console.log({result}) // result gives us {isConfirmed: true, isDenied: false, isDismissed: false, value: true}
+      // we can use the properties of result --> if isConfirmed is true that means we want to delete
+      if (result.isConfirmed){
+        const {_id} = category // from category we can extract the id
+        await axios.delete('/api/categories?_id='+_id) // here we make a request to the end point and then add a query to delete by the id
+        getCategories() // update the categories
+      }
     })
   }
 

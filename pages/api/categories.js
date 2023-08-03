@@ -31,6 +31,15 @@ const categoryHandler = async(req, res) => {
         // We will want to make a connection with mongoose database and send this categoryDoc
         res.json(categoryDoc)
     }
+
+
+
+    // If we have a delete request then delete the category by id
+    if (method === "DELETE"){
+        const {_id} = req.query
+        await Category.deleteOne({_id}) 
+        res.json("DELETED!")
+    }
 }
 
 export default categoryHandler
