@@ -1,7 +1,11 @@
 import Layout from "@/components/Layout"
 import axios from "axios"
 import { useState, useEffect } from "react"
-const Categories = () => {
+import { withSwal } from "react-sweetalert2"
+
+
+// Sweet alert 2 is a npm package that lets us create popups on the page and we inject the swal props into a functiional Categories component
+const Categories = ({swal}) => {
 
 
   const [name, setName] = useState('')
@@ -39,6 +43,23 @@ const Categories = () => {
     setEditedCategory(category)
     setName(category.name) // Prepopulate with the name and category IF it already has one (meaning if we are editing)
     setParentCategory(category.parentCategory?._id)
+  }
+
+
+  // delete category handler will use swal from react-sweetalert 2 to create a popup
+  const deleteCategory = (category) => {
+    // Code syntax provided in documentation
+    swal.fire({
+      title: 'Confirm to delete category?',
+      text: `Delete ${category.name}?`,
+      showCancelButton:true, 
+      cancelButtonTitle: 'Cancel',
+      confirmButtonText: 'YES!'
+    }).then(result => {
+      // when confirmed and promise resolved...
+    }).catch(error => {
+      // when promise rejected...
+    })
   }
 
 
@@ -117,7 +138,10 @@ const Categories = () => {
                         
                         Edit</button>
 
-                    <button className="btn-primary">
+                    <button 
+                      className="btn-primary"
+                      onClick={() => deleteCategory(category)}
+                      >
                    
                       
                       
@@ -134,4 +158,11 @@ const Categories = () => {
   )
 }
 
-export default Categories
+
+
+
+// Sweet alert 2 is a npm package that lets us create popups on the page
+// Here we inject the swal props into a functional component with that component being Categories above
+export default withSwal(({swal}, ref)=> (
+  <Categories swal={swal}/>
+))
