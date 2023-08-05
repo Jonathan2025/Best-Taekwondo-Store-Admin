@@ -12,6 +12,7 @@ const Categories = ({swal}) => {
   const [categories, setCategories] = useState([])
   const [parentCategory, setParentCategory] = useState(null)
   const [editedCategory, setEditedCategory] = useState(null)
+  const [properties, setProperties] = useState([])
 
   const getCategories = () => {
     axios.get('/api/categories').then(result =>{
@@ -64,6 +65,14 @@ const Categories = ({swal}) => {
         await axios.delete('/api/categories?_id='+_id) // here we make a request to the end point and then add a query to delete by the id
         getCategories() // update the categories
       }
+    })
+  }
+
+
+  // pretty much when we add property we take what was added originally and then add to it 
+  const addProperty = () => {
+    setProperties(prev => {
+      return[...prev, {name:'', values:''}] // name and values start off as empty strings
     })
   }
 
@@ -126,11 +135,19 @@ const Categories = ({swal}) => {
               
               <button 
                 type='submit' 
-                onClick = 
+                onClick = {addProperty} // call to the function handler
                 className='btn-default'>Add new property</button>
             </div>
 
           <button type="submit" className="btn-primary py-1">Save</button>
+          {properties.length > 0 && properties.map(
+            property => (
+              <div className="flex gap-1">
+                <input type='text' placeholder = "Property Name (ex.:color)"/>
+                <input type='text' placeholder = "Values"/>
+              </div>
+            )
+          )}
           
           
           
