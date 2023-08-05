@@ -13,6 +13,7 @@ const ProductForm =
     description: currentDescription,
     price: currentPrice,
     images: currentImages,
+    category: currentCategory
     }) => 
 {
 
@@ -26,7 +27,7 @@ const ProductForm =
     const [backToProducts, setBackToProducts] = useState(false) // we want to set a state where we can go back to the products page after submitting the form 
     const [isUploading, setIsUploading] = useState(false)
     const [categories, setCategories] = useState([false]) // this is the data that we get back from request from the categories endpoint
-    const [category, setCategory] = useState('') // this is setting the category ON the product 
+    const [category, setCategory] = useState(currentCategory || '') // this is setting the category ON the product 
 
 
 

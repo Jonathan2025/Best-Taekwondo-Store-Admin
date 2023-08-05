@@ -90,9 +90,13 @@ const Categories = ({swal}) => {
 
 
          {/* flex used to put input category name NEXT to a save button */}
-        <form onSubmit={saveCategory} className="flex gap-1"> 
-        {/* remove the slight margin at the bottom */}
+        <form onSubmit={saveCategory} > 
+        
+
+          {/* by adding the input isnde a div we are able to push the save button onto a new line */}
+          <div className="flex gap-1"> 
           <input 
+            //remove the slight margin at the bottom
             className="mb-0" 
             type="text" 
             placeholder={'Category Name'}
@@ -114,9 +118,24 @@ const Categories = ({swal}) => {
             )}
             </select>
 
+            </div>
 
+            <div className='mb-2'> 
+              {/* block will make the element take its own line */}
+              <label className="block">Properties</label>
+              
+              <button 
+                type='submit' 
+                onClick = 
+                className='btn-default'>Add new property</button>
+            </div>
 
           <button type="submit" className="btn-primary py-1">Save</button>
+          
+          
+          
+          
+          
         </form>
 
         <table className="basic mt-2">
