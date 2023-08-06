@@ -76,12 +76,23 @@ const Categories = ({swal}) => {
     })
   }
 
+  // When a user types on the new property NAME input it will appear in the input
   const propertyNameChange = (index, property, newName) => {
-    console.log({index, property, newName})
+    // console.log({index, property, newName}) // returns what is typed 
 
     setProperties(prev => {
       const properties = [...prev] // create a copy of the arrays properties 
       properties[index].name = newName 
+      return properties
+    })
+  }
+
+  const propertyValueChange = (index, property, newValues) => {
+    // console.log({index, property, newName}) // returns what is typed 
+
+    setProperties(prev => {
+      const properties = [...prev] // create a copy of the arrays properties 
+      properties[index].values = newValues 
       return properties
     })
   }
@@ -163,6 +174,7 @@ const Categories = ({swal}) => {
                 <input 
                   type='text' 
                   value = {property.values} 
+                  onChange={event => propertyValueChange(index, property, event.target.value)} // similar to the name change above but now we are doing it for values
                   placeholder = "Values"
                   />
               </div>
