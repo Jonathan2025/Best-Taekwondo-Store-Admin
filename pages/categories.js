@@ -76,6 +76,16 @@ const Categories = ({swal}) => {
     })
   }
 
+  const propertyNameChange = (index, property, newName) => {
+    console.log({index, property, newName})
+
+    setProperties(prev => {
+      const properties = [...prev] // create a copy of the arrays properties 
+      properties[index].name = newName 
+      return properties
+    })
+  }
+
 
   // create a useeffect that will run and make an axios request to the categories endpoint
   useEffect(()=> {
@@ -141,10 +151,20 @@ const Categories = ({swal}) => {
 
           <button type="submit" className="btn-primary py-1">Save</button>
           {properties.length > 0 && properties.map(
-            property => (
+            // Sometimes properties might have the same name so we want to use the index as well
+            (property,index) => (
               <div className="flex gap-1">
-                <input type='text' placeholder = "Property Name (ex.:color)"/>
-                <input type='text' placeholder = "Values"/>
+                <input 
+                  type='text' 
+                  value = {property.name}
+                  onChange={event => propertyNameChange(index, property, event.target.value)} 
+                  placeholder = "Property Name (ex.:color)"
+                  />
+                <input 
+                  type='text' 
+                  value = {property.values} 
+                  placeholder = "Values"
+                  />
               </div>
             )
           )}
