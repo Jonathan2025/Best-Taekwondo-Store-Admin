@@ -8,7 +8,7 @@ import { withSwal } from "react-sweetalert2"
 const Categories = ({swal}) => {
 
 
-  const [name, setName] = useState('')
+  const [name, setName] = useState(null)
   const [categories, setCategories] = useState([])
   const [parentCategory, setParentCategory] = useState(null)
   const [editedCategory, setEditedCategory] = useState(null)
@@ -134,7 +134,7 @@ const Categories = ({swal}) => {
               <label className="block">Properties</label>
               
               <button 
-                type='submit' 
+                type='button' 
                 onClick = {addProperty} // call to the function handler
                 className='btn-default'>Add new property</button>
             </div>
