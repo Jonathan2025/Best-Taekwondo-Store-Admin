@@ -15,9 +15,10 @@ const categoryHandler = async(req, res) => {
     }
    
     if (method === "POST"){
-        const {name, parentCategory} = req.body
+        const {name, parentCategory, properties} = req.body
          // If we have a post method then we want to create a category using what is pass from req.body
-        const categoryDoc = await Category.create({name, parentCategory})
+         // By doing parentCategory || undefined --> we are able to add a category without a parent
+        const categoryDoc = await Category.create({name, parentCategory : parentCategory || undefined, properties})
         // We will want to make a connection with mongoose database and send this categoryDoc
         res.json(categoryDoc)
     }
@@ -25,9 +26,9 @@ const categoryHandler = async(req, res) => {
 
     // If we have a put request then that means we are UPDATING a category
     if (method === "PUT"){
-        const {name, parentCategory, _id} = req.body
+        const {name, parentCategory, properties, _id} = req.body
          // If we have a post method then we want to create a category using what is pass from req.body
-        const categoryDoc = await Category.updateOne({_id}, {name, parentCategory}) // the first object is what document we want to update, the second object represents the new data
+        const categoryDoc = await Category.updateOne({_id}, {name, parentCategory : parentCategory || undefined, properties}) // the first object is what document we want to update, the second object represents the new data
         // We will want to make a connection with mongoose database and send this categoryDoc
         res.json(categoryDoc)
     }

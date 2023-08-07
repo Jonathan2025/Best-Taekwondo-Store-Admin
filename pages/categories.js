@@ -24,7 +24,11 @@ const Categories = ({swal}) => {
   // Create a save category handler function that will run on submit 
   const saveCategory = async(event) => {
     event.preventDefault()
-    const data = {name, parentCategory}
+    const data = {
+      name, 
+      parentCategory, 
+      // Properties are made up of property name and values 
+      properties: properties.map(property => ({name: property.name, values: property.values.split(',')}))}
     
     // If we are editing we dont want to CREATE a new category, instead we just want to edit the existing one
     if (editedCategory){
@@ -202,14 +206,40 @@ const Categories = ({swal}) => {
             
             )
           )}
-          <button type="submit" className="btn-primary py-1">Save</button>
+
+
+
+          
+          <div className ='flex gap-1'>
+            <button type="submit" className="btn-primary py-1">Save</button>
+            
+            {editedCategory && (
+              <button 
+              type="button" 
+
+              // Clicking the cancel button will reset the fields
+              onClick = {() => {
+
+                setEditedCategory(null)
+                setName('')
+                setParentCategory('')
+              }}
+
+              className="btn-default">Cancel</button>
+            )}
+          </div>
+          
+          
           
           
           
           
         </form>
+        
 
-        <table className="basic mt-2">
+
+        {!editedCategory && (
+          <table className="basic mt-2">
           <thead>
             <tr>
               <td>Category Name</td>
@@ -248,6 +278,8 @@ const Categories = ({swal}) => {
             )}
           </tbody>
         </table>
+        )}
+        
         
     </Layout>
   )

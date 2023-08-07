@@ -6,6 +6,7 @@ const CategorySchema = new Schema({
     name: {type:String, required:true},
     parentCategory: {type:mongoose.Types.ObjectId, ref:'Category'}, // this is a special data type so we will be using the mongoose object id for the parent category
     // the ref tells us what this objectID is --> which is a category
+    properties: [{type:Object}] // Properties will be as an object
 })
 
 // After creating a schema, we created a mongoose model based on that schema 
