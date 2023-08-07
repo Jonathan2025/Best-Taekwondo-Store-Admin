@@ -33,8 +33,6 @@ const categoryHandler = async(req, res) => {
         res.json(categoryDoc)
     }
 
-
-
     // If we have a delete request then delete the category by id
     if (method === "DELETE"){
         const {_id} = req.query

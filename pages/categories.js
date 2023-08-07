@@ -35,9 +35,14 @@ const Categories = ({swal}) => {
       data._id = editedCategory._id // here we can add to data the id of the category we clicked to edit
       await axios.put('/api/categories', data) 
       setEditedCategory(null) // once we edited a category we want to reset the editedcategory so then the user can edit something else 
+      
     } else{
       await axios.post('/api/categories', data) //make an axios request, passing in all the necessary data
+
     }
+    setName('')
+    setParentCategory('')
+    setProperties([])
     
     // Once the category is submitted we call getCategories so that the categories are updated
     getCategories()
