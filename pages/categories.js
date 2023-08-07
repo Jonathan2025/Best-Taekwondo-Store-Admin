@@ -81,7 +81,7 @@ const Categories = ({swal}) => {
     // console.log({index, property, newName}) // returns what is typed 
 
     setProperties(prev => {
-      const properties = [...prev] // create a copy of the arrays properties 
+      const properties = [...prev] // create a copy of the arrays current properties 
       properties[index].name = newName 
       return properties
     })
@@ -94,6 +94,18 @@ const Categories = ({swal}) => {
       const properties = [...prev] // create a copy of the arrays properties 
       properties[index].values = newValues 
       return properties
+    })
+  }
+
+
+  const removeProperty = (indexToRemove) => {
+    setProperties(prev => {
+      // the easiest way to delete a property is just by filtering them
+      return [...prev].filter((property, propertyIndex) => {
+        // return only properties that are NOT selected to be removed
+        return propertyIndex !== indexToRemove
+      })
+    
     })
   }
 
@@ -157,30 +169,40 @@ const Categories = ({swal}) => {
               <button 
                 type='button' 
                 onClick = {addProperty} // call to the function handler
-                className='btn-default'>Add new property</button>
+                className='btn-default mb-2'>Add new property</button>
+             
             </div>
 
-          <button type="submit" className="btn-primary py-1">Save</button>
+          
           {properties.length > 0 && properties.map(
             // Sometimes properties might have the same name so we want to use the index as well
             (property,index) => (
-              <div className="flex gap-1">
+              <div className="flex gap-1 mb-2">
                 <input 
                   type='text' 
+                  className="mb-0"
                   value = {property.name}
                   onChange={event => propertyNameChange(index, property, event.target.value)} 
                   placeholder = "Property Name (ex.:color)"
                   />
                 <input 
-                  type='text' 
+                  type='text'
+                  className="mb-0" 
                   value = {property.values} 
                   onChange={event => propertyValueChange(index, property, event.target.value)} // similar to the name change above but now we are doing it for values
                   placeholder = "Values"
                   />
+                  <button
+                    type='button' 
+                    onClick = {() => removeProperty(index)} // call to the function handler
+                    className='btn-default'>
+                    Remove
+                  </button>
               </div>
+            
             )
           )}
-          
+          <button type="submit" className="btn-primary py-1">Save</button>
           
           
           
