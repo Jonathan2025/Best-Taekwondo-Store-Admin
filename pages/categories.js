@@ -40,6 +40,7 @@ const Categories = ({swal}) => {
       await axios.post('/api/categories', data) //make an axios request, passing in all the necessary data
 
     }
+    // reset the inputs
     setName('')
     setParentCategory('')
     setProperties([])
@@ -53,8 +54,14 @@ const Categories = ({swal}) => {
     setEditedCategory(category)
     setName(category.name) // Prepopulate with the name and category IF it already has one (meaning if we are editing)
     setParentCategory(category.parentCategory?._id)
+    // to avoid the error with "split" we need to separate the property name and values 
+    setProperties(
+      category.properties.map(({name, values}) => ({
+        name, 
+        values:values.join(',')
+      })) 
+    )
   }
-
 
   // delete category handler will use swal from react-sweetalert 2 to create a popup
   const deleteCategory = (category) => {
