@@ -3,8 +3,14 @@ import multiparty from 'multiparty' // Multiparty is a package that parses multi
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3' // we will need the s3 client in order to upload images to our aws S3 bucket
 import fs from 'fs' //inbuilt application programming interface of the fs module which is used to read the file and return its content
 import mime from 'mime-types'
+import mongooseConnect from "@/lib/mongoose"
+import { isAdminRequest } from "./auth/[...nextauth]"
 
 const handleUpload = async(req, res) => {
+
+    await mongooseConnect() // call the mongoose connect function we created in mongoose.js
+    await isAdminRequest(req, res) // pretty much we make a call to isAdminrequest to make sure that the user logged in is an admin
+
     // using the multipart format from the documentation
     const form = new multiparty.Form()
     const bucketName = 'best-tkd-online'

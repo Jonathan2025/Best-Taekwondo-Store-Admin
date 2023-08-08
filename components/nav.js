@@ -13,6 +13,13 @@ export default function NavBar() {
     const router = useRouter() // useRouter allows us to access the pathname
     const {pathname} = router // useRouter is an object so we are accessing the pathname attribute 
 
+    // we can define a logout function that will redirect us to the localhost page when we signout
+    const logout = async() => {
+        await router.push('/')
+        await signOut()
+    }
+
+
     return (
         // Aside tag has portion whose content is INDIRECTLY related to the main content, it will be on the left side 
         // we do pr-0 to get rid of the space between the selected tab and the right side of the page so it looks connected
@@ -69,7 +76,7 @@ export default function NavBar() {
                 Settings
             </Link>
 
-            <button onClick = {() => signOut()} className={pathname.includes('/settings') ? activeLink : inactiveLink}>
+            <button onClick = {() => logout()} className={pathname.includes('/settings') ? activeLink : inactiveLink}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
                 </svg>

@@ -1,14 +1,14 @@
 // This will pretty much be 
 import Product from "@/models/Product"
 import mongooseConnect from "@/lib/mongoose"
-
+import { isAdminRequest } from "./auth/[...nextauth]"
 
 const handler = async(req, res) => {
     // If send a post request from new.js, therefore the method will be post
     const {method} = req // we can access the specific method post, put etc like this 
 
     await mongooseConnect() // call the mongoose connect function we created in mongoose.js
-    
+    await isAdminRequest(req, res) // pretty much we make a call to isAdminrequest to make sure that the user logged in is an admin
 
     // When we have a get request, we want to get all the Products
     if (method === 'GET'){

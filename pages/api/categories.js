@@ -2,13 +2,11 @@
 // And will be the handler depending on the req.body method
 import Category from "@/models/Category"
 import mongooseConnect from "@/lib/mongoose"
-import { getServerSession } from "next-auth"
-import { authOptions } from "./auth/[...nextauth]"
 import { isAdminRequest } from "./auth/[...nextauth]"
 const categoryHandler = async(req, res) => {
     const {method} = req // basically accessing req.method
     await mongooseConnect()
-    await isAdminRequest(req, res)
+    await isAdminRequest(req, res) // pretty much we make a call to isAdminrequest to make sure that the user logged in is an admin
 
 
     // Now if we have a get method then we just return the categories and show them 
