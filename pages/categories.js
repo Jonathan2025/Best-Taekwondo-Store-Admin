@@ -54,7 +54,7 @@ const Categories = ({swal}) => {
     setEditedCategory(category)
     setName(category.name) // Prepopulate with the name and category IF it already has one (meaning if we are editing)
     setParentCategory(category.parentCategory?._id)
-    // to avoid the error with "split" we need to separate the property name and values 
+    // to avoid the error with "split" we need to separate the property name and values because its an array of objects
     setProperties(
       category.properties.map(({name, values}) => ({
         name, 
@@ -235,6 +235,7 @@ const Categories = ({swal}) => {
                 setEditedCategory(null)
                 setName('')
                 setParentCategory('')
+                setProperties([])
               }}
 
               className="btn-default">Cancel</button>

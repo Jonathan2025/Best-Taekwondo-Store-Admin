@@ -13,7 +13,8 @@ const ProductForm =
     description: currentDescription,
     price: currentPrice,
     images: currentImages,
-    category: currentCategory
+    category: currentCategory,
+    
     }) => 
 {
 
@@ -94,6 +95,29 @@ const ProductForm =
     }
 
 
+    const propertiesToFill = []
+
+    if (categories.length > 0 && category){
+        // Here we must find the category that is selected
+        let selectedCategoryInfo = categories.find(({_id}) => _id === category)
+        
+        // we need to check if the selected category has a parent category
+        // but first we need to add the properties from the selected category info
+        if(selectedCategoryInfo){
+            propertiesToFill.push(...selectedCategoryInfo.properties)
+            // while we have a parent in the selected category information then we should add those properties
+            while(selectedCategoryInfo?.parent?.id){
+                const parentCategory = categories.find(({_id}) => _id === selectedCategoryInfo?.parent?._id)
+                propertiesToFill.push(...parentCategory.properties)
+                selectedCategoryInfo = parentCategory
+            }
+        }
+
+        console.log("heres", propertiesToFill)
+    }
+    
+
+
 
     return(
        <>
@@ -124,12 +148,27 @@ const ProductForm =
                 </select>
 
 
+                {/* From the categories we want to grab all the properties and then list them out*/}
+                {propertiesToFill.length > 0 && propertiesToFill.map(property => (
+                    <div>{property.name}</div>
+                    
+                ))}
+                
+
+
 
                 <textarea 
                     placeholder="Description"
                     value={description}
                     onChange = {event => setDescription(event.target.value)}
                 />
+
+
+
+              
+
+
+
                 <div className="mb-2 mt-2 flex flex-wrap gap-2">
                     
 

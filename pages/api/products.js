@@ -22,10 +22,10 @@ const handler = async(req, res) => {
 
     // create a product
     if (method === "POST"){ 
-        const {title, description, price, images, category} = req.body // we can get the title, desc, etc from the request.body
+        const {title, description, price, images, category, properties} = req.body // we can get the title, desc, etc from the request.body
         // If we have a post method then we want to create a product using what is pass from req.body
         const productDoc = await Product.create({
-            title, description, price, images, category
+            title, description, price, images, category, properties
         })
         // We will want to make a connection with mongoose database and send this productDoc
         res.json(productDoc)
@@ -33,8 +33,8 @@ const handler = async(req, res) => {
 
     // Edit a product 
     if (method === 'PUT'){
-        const {title, description, price, _id, images, category} = req.body // we want to make sure to get the id 
-        await Product.updateOne({_id}, {title, description, price, images, category}) // using the mongoose updateone function we use _id as the filter and then the title, descr is the info we want to update
+        const {title, description, price, _id, images, category, properties} = req.body // we want to make sure to get the id 
+        await Product.updateOne({_id}, {title, description, price, images, category, properties}) // using the mongoose updateone function we use _id as the filter and then the title, descr is the info we want to update
 
         res.json(true) // the update has been made
     }
