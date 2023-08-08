@@ -9,7 +9,8 @@ const ProductSchema = new Schema({
     description: String, 
     price: {type:Number, required:true},
     images: [{type:String}],
-    category: {type:mongoose.Types.ObjectId, ref:'Category'} // reference refers to what we are adding, which is the category model
+    category: {type:mongoose.Types.ObjectId, ref:'Category'}, // reference refers to what we are adding, which is the category model
+    properties: {type:Object}
 })
 
 // After creating a schema, we created a mongoose model based on that schema 

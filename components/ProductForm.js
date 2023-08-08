@@ -14,7 +14,7 @@ const ProductForm =
     price: currentPrice,
     images: currentImages,
     category: currentCategory,
-    
+    properties: currentProperties
     }) => 
 {
 
@@ -29,6 +29,7 @@ const ProductForm =
     const [isUploading, setIsUploading] = useState(false)
     const [categories, setCategories] = useState([false]) // this is the data that we get back from request from the categories endpoint
     const [category, setCategory] = useState(currentCategory || '') // this is setting the category ON the product 
+    const [productProperties, setProductProperties] = useState( currentProperties || {})
 
 
 
@@ -51,7 +52,7 @@ const ProductForm =
     // We used fetch in the past but here we will use axios to make the request
     const saveProduct = async(event) => {
         event.preventDefault() // clicking on submit button will submit the form right away, this prevents that 
-        const data = {title, description, price, images, category}
+        const data = {title, description, price, images, category, properties:productProperties} // set properties as productProperties thats why in our api endpoint we can just use "properties"
         if(_id){
             // if we have an id then we should be updating the product 
             await axios.put('/api/products', {...data, _id})// here we use a spread operator to pass in the data OF the specific product
@@ -115,6 +116,16 @@ const ProductForm =
 
         console.log("heres", propertiesToFill)
     }
+
+
+    const setProductProperty = (propertyName, value) => {
+        setProductProperties(prev => {
+            // We are starting to see a pattern here, when we set the new product proeprties we first grab the PREVIOUS properties then add the new ones
+            const newProductProperties = {...prev}
+            newProductProperties[propertyName] = value
+            return newProductProperties
+        })
+    }
     
 
 
@@ -150,7 +161,19 @@ const ProductForm =
 
                 {/* From the categories we want to grab all the properties and then list them out*/}
                 {propertiesToFill.length > 0 && propertiesToFill.map(property => (
+                <div className = "flex gap-1">
                     <div>{property.name}</div>
+
+
+                    {/* Now for each properties, allow the user to select from the property values that we have set when the property was created */}
+                    <select value = {productProperties[property.name]} onChange={event => setProductProperty(property.name, event.target.value)}>
+                        {property.values.map( value => (
+                            <option value={value}>{value}</option>
+                        ))}
+                    </select>
+                </div>
+                    
+
                     
                 ))}
                 
