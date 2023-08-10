@@ -27,14 +27,17 @@ export default function Layout({children}) {
 
 
     return(
-      
+      <>
       <div className = "bg-sky-600 min-h-screen"> 
         {/* // Otherwise if we are logged in then show the user. Minimum height to be screen */}
-        <button onClick={()=> setShowNav(true)}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
-          </svg>
-        </button>
+        {/* when we are on a medium sized screen then we will make the hamburger hidden */}
+        <div className = "block md:hidden"> 
+          <button onClick={()=> setShowNav(true)}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+            </svg>
+          </button>
+        </div>
         
         <div className='flex'> 
           {/* Add the navbar component and pass in the showNav state as a prop */}
@@ -44,6 +47,7 @@ export default function Layout({children}) {
           <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-5">{children}</div>
         </div> 
       </div>
+      </>
     )
   
 }
