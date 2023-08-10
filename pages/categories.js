@@ -277,7 +277,7 @@ const Categories = ({swal}) => {
                         Edit</button>
 
                     <button 
-                      className="btn-primary"
+                      className="btn-red"
                       onClick={() => deleteCategory(category)}
                       >
                    

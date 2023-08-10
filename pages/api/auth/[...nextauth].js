@@ -39,6 +39,9 @@ export const isAdminRequest = async(req, res) => {
 // here we check if the session is including an admin user email otherwise we will throw an error
   const session = await getServerSession(req,res,authOptions)
   if (!adminEmails.includes(session?.user?.email)){
-    throw 'Not an Admin User'
+    // Here we can send a custom res.status code 
+    res.status(401)
+    res.end() 
+    throw 'Not an Admin User, Please log in with an admin user Account'
   }
 }

@@ -7,7 +7,7 @@ export default function NavBar() {
 
     // Here we pretty much are creating tabs that will change depending on which one is clicked
     const inactiveLink ='flex gap-1 p-1'
-    const activeLink = inactiveLink + ' bg-white text-blue-500 rounded-l-lg' // make only the left side rounded
+    const activeLink = inactiveLink + ' bg-indigo-200 text-violet-500 rounded-lg' // make only the left side rounded
 
 
     const router = useRouter() // useRouter allows us to access the pathname
@@ -22,8 +22,9 @@ export default function NavBar() {
 
     return (
         // Aside tag has portion whose content is INDIRECTLY related to the main content, it will be on the left side 
-        // we do pr-0 to get rid of the space between the selected tab and the right side of the page so it looks connected
-        <aside className="text-white p-4 pr-0">
+
+        // fixed w-full bg-sky0500 h-full
+        <aside className="text-white p-4 fixed w-full bg-sky-500 h-full">
             {/* Store icon and words are fitted on one line*/}
             {/* placed some space between the logo and the rest of nav bar */}
             <Link href={'/'} className ="flex gap-1 mb-5"> 
