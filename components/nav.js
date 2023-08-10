@@ -3,7 +3,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { signOut } from "next-auth/react"
 
-export default function NavBar() {
+export default function NavBar({show}) {
 
     // Here we pretty much are creating tabs that will change depending on which one is clicked
     const inactiveLink ='flex gap-1 p-1'
@@ -23,8 +23,10 @@ export default function NavBar() {
     return (
         // Aside tag has portion whose content is INDIRECTLY related to the main content, it will be on the left side 
 
-        // fixed w-full bg-sky0500 h-full
-        <aside className="text-white p-4 fixed w-full bg-sky-500 h-full">
+        // so pretty much if the show nav is true from props we passed in  then we will add a "left-full property" AND show the nav bar
+        // by adding top 0, the buttom will dsappear when we click on the hamburger. On medium screens we will have the width of the nav bar be auto
+        // When we click the button, transition all will create a transition that pops up the nav bar
+        <aside className={(show?"left-0":"-left-full")+" top-0 text-white p-4 fixed w-full bg-sky-500 h-full md:static md:w-auto transition-all"}>
             {/* Store icon and words are fitted on one line*/}
             {/* placed some space between the logo and the rest of nav bar */}
             <Link href={'/'} className ="flex gap-1 mb-5"> 
