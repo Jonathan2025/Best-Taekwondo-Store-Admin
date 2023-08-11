@@ -27,8 +27,12 @@ export default function NavBar({show}) {
         // so pretty much if the show nav is true from props we passed in  then we will add a "left-full property" AND show the nav bar
         // by adding top 0, the buttom will dsappear when we click on the hamburger. On medium screens we will have the width of the nav bar be auto
         // When we click the button, transition all will create a transition that pops up the nav bar
-        <aside className={(show?"left-0":"-left-full")+" top-0 text-white p-4 fixed w-full bg-sky-500 h-full md:static md:w-auto transition-all"}>
-            <Logo />
+        <aside className={(show?"left-0":"-left-full")+" top-0 text-white p-4 fixed w-full bg-sky-600 h-full md:static md:w-auto transition-all"}>
+            {/* Putting logo inside a div allows us to add properties to logo on the nav bar only */}
+            <div className = "mb-5"> 
+             <Logo />
+            </div>
+            
 
             {/* flex flex col will position the items vertically */}
             <nav className="flex flex-col gap-2">
