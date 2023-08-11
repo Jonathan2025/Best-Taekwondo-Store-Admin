@@ -7,6 +7,7 @@
 input, textarea, select {
   @apply border-2 border-gray-500 rounded-md p-1 w-full;
   @apply mb-2; /* Apply more spacing on the bottom */
+  @apply shadow-sm
 }
 
 /* When user clicks on the input then it will change color outline */
@@ -20,28 +21,28 @@ h1{
 
 
 .btn-primary{
-  @apply bg-blue-500 text-white p-2 rounded-md;
+  @apply bg-sky-400 text-white p-2 rounded-md;
 }
 
 /* Styling for the products table */
 
 table.basic{
-  @apply w-full;
+  @apply w-full shadow-md;
 }
 
 
 table.basic tr td{
-  @apply border border-sky-400 p-1;
+  @apply px-4 py-1;
 }
 
 table.basic thead tr td{
-  @apply bg-sky-500;
+  @apply text-gray-500 uppercase border-b border-indigo-300 px-4 py-1;
 }
 
 
 /* Styling to the edit button on the x axis and y axis */
 table.basic a {
-  @apply bg-blue-500 text-white rounded-md inline-flex py-1 gap-1 px-2 mr-1;
+  @apply bg-sky-500 text-white rounded-md inline-flex py-1 gap-1 px-2 mr-1;
 }
 
  /* we can access the delete button using a:nth-child(2), the delete button */

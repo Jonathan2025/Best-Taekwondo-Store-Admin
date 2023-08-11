@@ -8,7 +8,7 @@ export default function NavBar({show}) {
 
     // Here we pretty much are creating tabs that will change depending on which one is clicked
     const inactiveLink ='flex gap-1 p-1'
-    const activeLink = inactiveLink + ' bg-indigo-200 text-violet-500 rounded-lg' // make only the left side rounded
+    const activeLink = inactiveLink + ' bg-sky-300 text-sky-600 rounded-lg' // make only the left side rounded
 
 
     const router = useRouter() // useRouter allows us to access the pathname

@@ -33,7 +33,7 @@ export default function Layout({children}) {
       <div className = "bg-sky-600 min-h-screen"> 
         {/* // Otherwise if we are logged in then show the user. Minimum height to be screen */}
         {/* when we are on a medium sized screen then we will make the hamburger hidden */}
-        <div className = "block md:hidden flex items-center p-3"> 
+        <div className = "block md:hidden flex items-center p-"> 
           <button onClick={()=> setShowNav(true)}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
@@ -51,7 +51,7 @@ export default function Layout({children}) {
           <NavBar show={showNav}/>  
 
           {/* name section to take up the entire right side availiable space, margin right, top and bottom of 2, with rounded corners*/}
-          <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-5">{children}</div>
+          <div className="bg-white flex-grow rounded-b-lg p-5">{children}</div>
         </div> 
       </div>
       </>
