@@ -21,7 +21,7 @@ h1{
 
 
 .btn-primary{
-  @apply bg-sky-400 text-white p-2 rounded-md;
+  @apply bg-sky-300 text-sky-600 p-2 rounded-md inline-flex ;
 }
 
 /* Styling for the products table */
@@ -42,18 +42,18 @@ table.basic thead tr td{
 
 /* Styling to the edit button on the x axis and y axis */
 table.basic a {
-  @apply bg-sky-500 text-white rounded-md inline-flex py-1 gap-1 px-2 mr-1;
+  @apply bg-sky-300 text-sky-600 rounded-md inline-flex py-1 gap-1 px-2 mr-1;
 }
 
  /* we can access the delete button using a:nth-child(2), the delete button */
 table.basic a:nth-child(2) {
-  @apply bg-red-600;
+  @apply bg-red-300 text-red-600;
 }
 
 
 /* Styling for the delete confirmation page */
 .btn-red{
-  @apply bg-red-600 text-white p-2 rounded-md;
+  @apply bg-red-300 text-red-600 p-2 rounded-md;
 }
 
 .btn-default{

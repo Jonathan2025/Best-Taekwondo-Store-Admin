@@ -137,7 +137,7 @@ const ProductForm =
                 {/* The input will be styled from the global css file */}
                 <input 
                     type="text"
-                    placeholder="New Product"
+                    placeholder="New Product Name"
                     value={title}
                     // onchange we will change the title state with what was added from the event.target
                     onChange = {event => setTitle(event.target.value)}
@@ -200,11 +200,11 @@ const ProductForm =
 
                     {/* For the upload button center the items and place some space in between */}
                     {/* we use label instead of button because we have the input tag, with file upload */}
-                    <label className="w-32 h-32 cursor-pointer text-center flex items-center justify-center gap-1 text-gray-500 rounded-lg bg-gray-200">
+                    <label className="w-32 h-32 cursor-pointer text-center flex items-center justify-center gap-1 text-gray-500 rounded-lg text-sm bg-sky-300 shadow-md">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                         </svg>
-                        Upload
+                        Upload Photos
                         <input type="file" onChange = {uploadImages} className="hidden"/>
                     </label>
                     
@@ -216,7 +216,7 @@ const ProductForm =
 
                          {/* Similar to our kickflix app if there is an image uploaded we are pretty much using the link to then show the actual image */}
                         {!!images?.length && images.map((link) => (
-                        <div key={link} className="h-32">
+                        <div key={link} className="h-32 bg-sky-500 p-2 rounded-md shawdow-sm">
                             <img src={link} alt="" className="rounded-lg"/>
                         </div>
                     ))}
