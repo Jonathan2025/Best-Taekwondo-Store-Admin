@@ -23,7 +23,7 @@ const DeleteProductPage = () => {
         })
     }, [id])
 
-    console.log('this is', productInfo)
+    console.log('THIS IS THE ', productInfo)
 
     // IF the user clicks NO, then they will be returned to the products page 
     const previousPage = () => {
@@ -42,7 +42,7 @@ const DeleteProductPage = () => {
         // the ? is used in case we dont have anything in product info
         <Layout>
                 {/* Accessing the title requires us to get the 0 index of the object */}
-                <h1 className="text-center">Are you sure you want to delete {productInfo[0].title}</h1>
+                <h1 className="text-center">Are you sure you want to delete {productInfo?.title}</h1>
                 {/* add space between the two buttons and center it */ }
                 <div className = "flex gap-2 justify-center"> 
                     <button onClick={deleteProduct} className="btn-red">Yes</button>
