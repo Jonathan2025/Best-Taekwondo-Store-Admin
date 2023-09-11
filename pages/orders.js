@@ -41,9 +41,9 @@ const OrdersPage = () => {
                 </td>
                 <td> 
                   {/* For the order we will map out the product information  */}
-                  {order.cartItems.map(line => (
+                  {order.cartItems.map(item => (
                     <>
-                      {JSON.stringify(line)}<br/> 
+                      {item.price_data?.product_data.name} x {item.quantity}<br/>
                     
                     
                     </>
