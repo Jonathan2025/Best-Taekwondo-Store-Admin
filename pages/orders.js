@@ -22,18 +22,33 @@ const OrdersPage = () => {
         <table className = "basic">
           <thead>
             <tr> 
-              <th>ID</th>
+              <th>Date</th>
               <th>Recipient</th>
               <th>Products</th>
             </tr>
           </thead>
           <tbody>
+            {/* For each order we map out the order information */}
             {orders && orders.map(order => (
               <tr> 
-                <td>{order._id}</td>
+                <td>{order.createdAt}</td>
                 <td> 
                   {order.name} {order.email} <br/>
+                  {order.city} {order.zip} <br/>
+                  {order.country} {order.address} <br/>
+                  {order.address} <br/>
 
+                </td>
+                <td> 
+                  {/* For the order we will map out the product information  */}
+                  {order.cartItems.map(line => (
+                    <>
+                      {JSON.stringify(line)}<br/> 
+                    
+                    
+                    </>
+                  ))}
+                  
                 </td>
               </tr>
             ))}
