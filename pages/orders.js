@@ -31,12 +31,14 @@ const OrdersPage = () => {
             {/* For each order we map out the order information */}
             {orders && orders.map(order => (
               <tr> 
-                <td>{order.createdAt}</td>
+                {/* split at "T" and then get the date, converting it to full date stirng */}
+                <td>{new Date(order.createdAt.split("T")[0]).toDateString()}</td>
                 <td> 
                   {order.name} {order.email} <br/>
-                  {order.city} {order.zip} <br/>
-                  {order.country} {order.address} <br/>
                   {order.address} <br/>
+                  {order.city} {order.zip}, {order.country} <br/>
+                  
+            
 
                 </td>
                 <td> 
